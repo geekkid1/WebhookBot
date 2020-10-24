@@ -1,7 +1,7 @@
 import discord,sqlite3,argparse,logging,time,asyncio
 from discord.ext import commands
 from discord.ext.commands import when_mentioned
-import command_basics,referral_cog,dbobj,debug_cog,webhooks_cog
+import command_basics,dbobj,debug_cog,webhooks_cog
 from util_classes import database
 from config.config_vars import config
 
@@ -75,6 +75,8 @@ bot.remove_command('help')
 # -iscord client and is therefore online and ready to use.
 @bot.event
 async def on_ready():
+  database.repair_table(dbobj.servers)
+  database.repair_table(dbobj.webhook_profile)
   logger.info("Ready!")
   print("Ready!")
 
@@ -96,7 +98,7 @@ async def on_command_error(ctx,error):
   else:
     name = ctx.command.qualified_name if ctx.command else "None"
     await ctx.send("Command error. Please contact the developer if this persists.")
-    await ctx.send("```\n" + str(error) + "\n```")
+    #await ctx.send("```\n" + str(error) + "\n```")
     #print(str(error))
     logger.exception("Error with command {0} in guild {1.name} ({1.id}): {2}".format(name,ctx.guild,error))
     raise error
@@ -104,7 +106,6 @@ async def on_command_error(ctx,error):
 # Load all of the cogs made in the other python files in this
 # project. See the other files in the folder for more details
 bot.add_cog(command_basics.general(bot))
-bot.add_cog(referral_cog.referrals(bot))
 bot.add_cog(debug_cog.debug(bot))
 bot.add_cog(webhooks_cog.webhooks(bot))
 
