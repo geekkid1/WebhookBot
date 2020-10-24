@@ -1,6 +1,6 @@
-# Discord Referral Bot
+# Discord Webhook Bot
 
-Welcome! This repository is for, as you have hopefully already guessed, a referral bot for Discord. Hosted individually on Heroku (though it can be locally installed), this code just connects to Discord through a bot profile you create using the Discord Developer Portal, and then waits for you to use it. It's really nothing special.
+Welcome! This repository is for, as you have hopefully already guessed, a webhook bot for Discord. Hosted individually on Heroku (though it can be locally installed), this code just connects to Discord through a bot profile you create using the Discord Developer Portal, and then waits for you to use it. It's really nothing special.
 
 ## Setup
 
@@ -14,7 +14,7 @@ First things first, create a Discord bot profile through the Discord Developer p
 
 Next you need to add this bot to your Heroku account by pressing this button:
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/geekkid1/ReferralBot)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/geekkid1/WebhookBot)
 
 First it will probably ask you for an app name, which you can set to anything you want really, and then after that some config variables. This is where the token and channel ids come in. Paste them into their respective config variable boxes. Then continue. This will, if it works correctly, auto-deploy the app to your Heroku account. If you don't have one, this will prompt you to create one or log in to one.
 
