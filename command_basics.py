@@ -19,9 +19,15 @@ class general(commands.Cog):
   @commands.cooldown(1,10,commands.BucketType.guild)
   @commands.command(name="prefix",help="Change the command prefix for the bot.")
   async def change_prefix(self, ctx, prefix):
-    data = (prefix,ctx.guild.id)
-    database.update_data(dbobj.servers,data)
-    await ctx.send('Command prefix changed to "**{0}**".'.format(prefix))
+    v = database.select_one(dbobj.servers,id=ctx.guild.id)
+    if v != [] and v != None:
+      data = (prefix,ctx.guild.id)
+      database.update_data(dbobj.servers,data)
+      await ctx.send('Command prefix changed to "**{0}**".'.format(prefix))
+    else:
+      data = (ctx.guild.id,prefix)
+      database.insert_row(dbobj.servers,data)
+      await ctx.send('Command prefix set to "**{0}**".'.format(prefix))
 
   @commands.command(name="search",help="Search for a specific command within this bot's available ones.")
   async def search_for_command(self, ctx, *, query):
@@ -48,7 +54,6 @@ class general(commands.Cog):
     if(query == None):
       out.append("~~~Command List~~~")
       out.append(list_commands(self, "general", "General: "))
-      out.append(list_commands(self, "referrals", "Referrals: "))
       # add your other cogs here
       out.append("```")
       await ctx.send("\n".join(out))

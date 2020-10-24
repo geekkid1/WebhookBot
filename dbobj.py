@@ -25,30 +25,6 @@ class servers:
   fields = ("id","prefix")
   table_name = "servers"
 
-class scores:
-  sql_create = '''CREATE TABLE IF NOT EXISTS scores (
-  user_id bigint PRIMARY KEY,
-  score bigint);'''
-  sql_insert = '''INSERT INTO scores(user_id,score)
-  VALUES(%s,%s)'''
-  sql_update = '''UPDATE scores
-  SET score = %s
-  WHERE user_id = %s'''
-  fields = ("user_id","score")
-  table_name = "scores"
-
-class user_link:
-  sql_create = '''CREATE TABLE IF NOT EXISTS user_link (
-  source bigint PRIMARY KEY,
-  target bigint);'''
-  sql_insert = '''INSERT INTO user_link(source,target)
-  VALUES(%s,%s)'''
-  sql_update = '''UPDATE user_link
-  SET target = %s
-  WHERE source = %s'''
-  fields = ("source","target")
-  table_name = "user_link"
-
 class webhook_profile:
   sql_create='''CREATE TABLE IF NOT EXISTS webhook_profile (
   user_id bigint PRIMARY KEY,
